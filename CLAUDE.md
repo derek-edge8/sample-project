@@ -3,7 +3,7 @@
 ## Stack (already installed and wired — record the values)
 - GitHub repo: https://github.com/derek-edge8/sample-project (public, branch main)
 - Vercel project: edge8-ais-projects/sample-project (Git connected; push to main deploys)
-- Domain: sample-project.vercel.app (no custom domain yet; needed for Resend in Build 2)
+- Domain: sample-project-brown-iota.vercel.app (no custom domain yet; needed for Resend in Build 2)
 - Supabase project: sample-project (ref faqoakmkyyuwgxwkfuby, ap-southeast-2)
 - Supabase URL: https://faqoakmkyyuwgxwkfuby.supabase.co
 - Supabase service key: set in .env.local and Vercel (production + development)

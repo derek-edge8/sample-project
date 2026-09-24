@@ -3,8 +3,8 @@
 project_id = "sample-project"
 
 [auth]
-site_url = "https://sample-project.vercel.app"
-additional_redirect_urls = ["https://sample-project.vercel.app/**", "http://localhost:3000/**"]
+site_url = "https://sample-project-brown-iota.vercel.app"
+additional_redirect_urls = ["https://sample-project-brown-iota.vercel.app/**", "http://localhost:3000/**"]
 # /admin is for one seeded account; nobody can sign themselves up.
 enable_signup = false
 

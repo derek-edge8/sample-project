@@ -68,7 +68,7 @@ My inquiry types (contacts.type enum): sizing, materials, laptop_fit
 My design system: Minimalist Apple
 My brand colors: design system defaults — main #1D1D1F (near-black text), accent #0071E3 (blue for buttons and links), background #FFFFFF with #F5F5F7 soft-gray panels
 My custom attributes (people.attributes jsonb keys): laptop_size (pick-from-list: 13", 14", 15", 16"+); primary_use (pick-from-list: commute, travel, hiking, school)
-My domain: sample-project.vercel.app (Vercel default; a custom domain is required before Resend sending in Build 2)
+My domain: sample-project-brown-iota.vercel.app (Vercel default; a custom domain is required before Resend sending in Build 2)
 
 ## BUILD 1 (small) — Prove the loop
 

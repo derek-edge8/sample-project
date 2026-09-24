@@ -11,7 +11,9 @@ import {
   type Source,
 } from "@/lib/crm";
 
-const SOURCE_SITE = "sample-project.vercel.app";
+const SOURCE_SITE = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL).host
+  : "unknown";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export type Inquiry = {

@@ -45,7 +45,7 @@ Env: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
      must match the contract. Message is required, max 5,000 chars.
   2. Upsert `people` `on conflict (email)`. Update name, phone, and attributes (merged).
      Once `ok_to_contact` is true, never set it back to false.
-     `source_site = 'sample-project.vercel.app'`.
+     `source_site = 'sample-project-brown-iota.vercel.app'`.
   3. Insert `contacts` with `person_id`, `type`, `subject` (default: "Sizing question" /
      "Materials question" / "Laptop fit question"), `message`, `source`, `status = 'new_lead'`.
 - `source` is `website_form` by default. The operator logs email or phone inquiries
@@ -84,12 +84,12 @@ with type, message, and both attributes readable without opening Supabase.
 
 ## Step 5 — Deploy to the live domain
 Env: set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
-`SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SITE_URL=https://sample-project.vercel.app`
+`SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SITE_URL=https://sample-project-brown-iota.vercel.app`
 in Vercel (Production and Preview). Needs GitHub, Vercel, and Domain confirmed in CLAUDE.md.
 - Commit and push to the linked GitHub repo. Vercel deploys on push.
 
-**Check:** Open `https://sample-project.vercel.app` on your phone and submit as
-`test2@example.com`. Within seconds it's at the top of `https://sample-project.vercel.app/admin`.
+**Check:** Open `https://sample-project-brown-iota.vercel.app` on your phone and submit as
+`test2@example.com`. Within seconds it's at the top of `https://sample-project-brown-iota.vercel.app/admin`.
 
 ## Step 6 — Lock /admin (only after you explicitly say "add auth")
 Env: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
@@ -102,7 +102,7 @@ Env: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
   checks the user server-side (belt and braces).
 - A sign-out button on `/admin`.
 
-**Check:** In a private window, `https://sample-project.vercel.app/admin` redirects to
+**Check:** In a private window, `https://sample-project-brown-iota.vercel.app/admin` redirects to
 `/admin/login`. After you log in, the leads list shows.
 
 ## Step 7 — Run-through and catalog update
