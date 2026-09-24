@@ -11,8 +11,8 @@
 
 ## Build (filled as we go)
 - Plan written: done
-- Build 1 (small) status: [pending]
-- Admin account seeded: [pending]
+- Build 1 (small) status: ✅ (built, deployed, verified 2026-09-24; your login + run-through are DoD items 5 and 7)
+- Admin account seeded: ✅ with email derek.nguyen@edge8.ai (invite sent; you set the password from the email)
 - Build 2 (all) status: [pending]
 - Resend domain verified: [pending]
 - Synthetic data loaded: [pending]

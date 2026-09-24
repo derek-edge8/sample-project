@@ -111,11 +111,11 @@ in under 60 seconds from a cold start. Then I update CLAUDE.md: Build 1 status â
 Admin account seeded â†’ done, plus the confirmed stack values.
 
 ## Definition of Done (every box must be true)
-- [ ] The contact form is live on my real domain, not localhost.
-- [ ] Submitting it creates exactly one People row and one linked Contacts
+- [x] The contact form is live on my real domain, not localhost.
+- [x] Submitting it creates exactly one People row and one linked Contacts
   row, deduplicated by email on repeat submits.
-- [ ] My chosen custom attributes are saved correctly inside attributes.
-- [ ] A new Contacts row lands in status new_lead.
+- [x] My chosen custom attributes are saved correctly inside attributes.
+- [x] A new Contacts row lands in status new_lead.
 - [ ] I can log in to /admin with my one seeded account.
 - [ ] The admin leads page shows the submission within seconds, newest first.
 - [ ] I personally run the full flow once: submit as a visitor, log in, see it.
