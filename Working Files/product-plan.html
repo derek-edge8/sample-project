@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product plan · sample-project</title>
+<style>
+  :root {
+    --ink: #1D1D1F;
+    --muted: #6E6E73;
+    --accent: #0071E3;
+    --bg: #FFFFFF;
+    --panel: #F5F5F7;
+    --line: #D2D2D7;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  main { max-width: 880px; margin: 0 auto; padding: 72px 24px 96px; }
+  .eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+  h1 { font-size: 44px; line-height: 1.1; font-weight: 700; letter-spacing: -.02em; margin: 0 0 48px; }
+  h2 { font-size: 28px; line-height: 1.2; font-weight: 700; letter-spacing: -.01em; margin: 72px 0 20px; }
+  h3 { font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 32px 0 10px; }
+  p { margin: 0 0 16px; }
+  .lead { font-size: 21px; line-height: 1.5; }
+  .label { font-weight: 600; }
+  .panel { background: var(--panel); border-radius: 18px; padding: 28px 32px; margin: 16px 0; }
+  .brief p, .brief li { font-size: 16px; }
+  ul { margin: 0 0 16px; padding-left: 22px; }
+  li { margin: 0 0 8px; }
+  code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: .9em; background: var(--panel); padding: 1px 6px; border-radius: 6px; }
+  .panel code { background: var(--bg); }
+  dl.kv { display: grid; grid-template-columns: 220px 1fr; margin: 0; border-top: 1px solid var(--line); }
+  dl.kv dt, dl.kv dd { margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  dl.kv dt { font-weight: 600; padding-right: 16px; }
+  .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 4px; border: 1px solid var(--line); vertical-align: -2px; margin-right: 6px; }
+  .block { border: 1px solid var(--line); border-radius: 22px; padding: 36px 40px; margin: 24px 0; }
+  .block h2 { margin-top: 0; }
+  .tag { display: inline-block; font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; }
+  ul.check { list-style: none; padding: 0; }
+  ul.check li { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--panel); margin: 0; }
+  ul.check input { margin-top: 5px; width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+  .note { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; color: var(--ink); }
+  footer { margin-top: 72px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 640px) {
+    main { padding: 48px 16px 72px; }
+    h1 { font-size: 34px; }
+    .block, .panel { padding: 24px 20px; }
+    dl.kv { grid-template-columns: 1fr; }
+    dl.kv dt { border-bottom: 0; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<p class="eyebrow">Product plan</p>
+<h1>Product plan · sample-project</h1>
+
+<section>
+  <h2>What we're actually building and why</h2>
+  <p class="lead"><span class="label">In one sentence:</span> Today a backpack inquiry can arrive by website form, email, or phone and live only in the channel it came in on, so it can sit unanswered or be forgotten after the first chat; this CRM puts every inquiry in one list with a stage and a timestamp, so I can answer every sizing, materials, and laptop-fit question within 24 hours and see exactly which buyers are one reply away from purchasing.</p>
+  <p><span class="label">Who it's for:</span> me, the operator, who has to answer and follow up on every inquiry; and the shopper filling out my form, who is about to buy a backpack and needs one specific answer first (will it fit, what's it made of, which size) before they commit.</p>
+  <p><span class="label">What we are deliberately NOT building:</span> no affiliates, no subscriptions, no cohorts, no analytics dashboards, no integrations beyond what's named here. If it isn't load-bearing for capturing and working a lead, it's out.</p>
+</section>
+
+<section>
+  <h2>The brief (drives every /goal command)</h2>
+  <div class="panel brief">
+    <p>You are my engineering partner for building my CRM today. The stack is already installed and wired (Next.js on Vercel, Supabase, Resend, domain). Do not reinstall or reprovision anything. Build the app with two surfaces: a public marketing site that captures leads, and an /admin CRM. The /admin section is open and unprotected at first; it gets locked down with email-and-password Supabase Auth later in the build. Do not add any auth, login page, or route protection until I explicitly ask for it.</p>
+    <p>The CRM has exactly four parts:</p>
+    <ul>
+      <li><strong>People:</strong> a contact directory, one row per person, deduplicated by email. Columns: id, email (unique), name, phone, company, role, source_site, ok_to_contact, attributes (jsonb), created_at, updated_at. The custom attributes I named go inside attributes. The keys are my attribute names and the values match the types I specified.</li>
+      <li><strong>Contacts:</strong> an inquiry pipeline. Each inquiry links to a person and moves through stages new_lead, contacted, discovery_call, proposal, won, lost. Columns: id, person_id, type, subject, message, source, status, metadata (jsonb), created_at. The type field is constrained to exactly the inquiry types I gave in Q4 (lowercased).</li>
+      <li><strong>activity_log:</strong> every status change on a Contacts row writes one row here. Columns: id, contact_id, person_id, from_status, to_status, actor, note, created_at.</li>
+      <li><strong>Orders:</strong> what people bought. Columns: id, person_id, product_name, amount_cents, currency, status (pending, paid, refunded, cancelled), created_at.</li>
+      <li><strong>Newsletter:</strong> people who opted in to email, tracked by people.ok_to_contact = true. No separate table.</li>
+    </ul>
+    <p>Conventions:</p>
+    <ul>
+      <li>Upsert people by email; never duplicate a person.</li>
+      <li>Access Supabase server-side with the service key; never expose secrets to the client; keys live in environment variables only.</li>
+      <li>Keep it simple: no affiliates, no subscriptions, no cohorts.</li>
+      <li>Work one step at a time and wait for my approval before each step.</li>
+    </ul>
+  </div>
+
+  <h3>Interview answers</h3>
+  <dl class="kv">
+    <dt>My business</dt>
+    <dd>sample-project — sells backpacks</dd>
+    <dt>My inquiry types (contacts.type enum)</dt>
+    <dd><code>sizing</code>, <code>materials</code>, <code>laptop_fit</code></dd>
+    <dt>My design system</dt>
+    <dd>Minimalist Apple</dd>
+    <dt>My brand colors</dt>
+    <dd>design system defaults — <span class="swatch" style="background:#1D1D1F"></span>main #1D1D1F (near-black text), <span class="swatch" style="background:#0071E3"></span>accent #0071E3 (blue for buttons and links), <span class="swatch" style="background:#FFFFFF"></span>background #FFFFFF with <span class="swatch" style="background:#F5F5F7"></span>#F5F5F7 soft-gray panels</dd>
+    <dt>My custom attributes (people.attributes jsonb keys)</dt>
+    <dd><code>laptop_size</code> (pick-from-list: 13", 14", 15", 16"+); <code>primary_use</code> (pick-from-list: commute, travel, hiking, school)</dd>
+    <dt>My domain</dt>
+    <dd>sample-project.vercel.app (Vercel default; a custom domain is required before Resend sending in Build 2)</dd>
+  </dl>
+</section>
+
+<section class="block">
+  <span class="tag">Build 1 · small</span>
+  <h2>BUILD 1 (small) — Prove the loop</h2>
+
+  <h3>Goal</h3>
+  <p>A stranger can submit an inquiry on my live site and I can see that lead inside /admin, on the same day, without anyone touching the database by hand. This closes the exact gap I named in Q1: inquiries scattered across form, email, and phone with no single place to see them. It is the smallest thing that proves the whole system works end to end. Nothing else matters until this is real.</p>
+
+  <h3>The problem</h3>
+  <p>A shopper asks "will this fit my 16-inch laptop?" and the question sits in whichever channel it arrived in. There is no single list, so an unanswered question is invisible, and an unanswered pre-purchase question is a lost sale.</p>
+
+  <h3>The data</h3>
+  <p>People (email, name, phone, ok_to_contact, attributes with laptop_size and primary_use) and Contacts (type of sizing, materials, or laptop_fit; subject; message; source; status). Nothing else.</p>
+
+  <h3>The workflow</h3>
+  <p>Shopper opens the site → fills in name, email, optional phone, picks an inquiry type, laptop size, and primary use, writes a message → submits → server upserts the People row by email and creates a Contacts row in new_lead → I open /admin and see it at the top of the list. Inquiries that arrive by email or phone get entered through the same form, so they land in the same list.</p>
+
+  <h3>The ROI</h3>
+  <p>At about 10 inquiries a week, every inquiry that goes unseen is a buyer lost at the moment they were ready to buy. Recovering even one lost inquiry a week is roughly 52 extra sales a year. Build 1 costs one session. (Order value is not yet known; put it in Orders during Build 2 to turn this into a dollar figure.)</p>
+
+  <h3>Scope</h3>
+  <p>The People and Contacts tables with my custom attributes wired into the jsonb column; a working contact form on the live marketing site that writes a People row (upserted by email) and a linked Contacts row; one admin login with a single verified account; one admin page that lists incoming leads newest first.</p>
+
+  <h3>Definition of Done (every box must be true)</h3>
+  <ul class="check">
+    <li><input type="checkbox"><span>The contact form is live on my real domain, not localhost.</span></li>
+    <li><input type="checkbox"><span>Submitting it creates exactly one People row and one linked Contacts row, deduplicated by email on repeat submits.</span></li>
+    <li><input type="checkbox"><span>My chosen custom attributes are saved correctly inside attributes.</span></li>
+    <li><input type="checkbox"><span>A new Contacts row lands in status new_lead.</span></li>
+    <li><input type="checkbox"><span>I can log in to /admin with my one seeded account.</span></li>
+    <li><input type="checkbox"><span>The admin leads page shows the submission within seconds, newest first.</span></li>
+    <li><input type="checkbox"><span>I personally run the full flow once: submit as a visitor, log in, see it.</span></li>
+  </ul>
+
+  <h3>Success Criteria (how we know it's good, not just done)</h3>
+  <ul class="check">
+    <li><input type="checkbox"><span>From a cold start, I can go submit to visible in under 60 seconds.</span></li>
+    <li><input type="checkbox"><span>Two submissions from the same email produce one person, not two.</span></li>
+    <li><input type="checkbox"><span>I can read the lead's name, type, message, and my custom attributes on the admin page without opening Supabase.</span></li>
+    <li><input type="checkbox"><span>No lead can land and go unseen, which is the failure mode I named in Q1.</span></li>
+  </ul>
+</section>
+
+<section class="block">
+  <span class="tag">Build 2 · all</span>
+  <h2>BUILD 2 (all) — Make it the system I run the business from</h2>
+
+  <h3>Goal</h3>
+  <p>Turn the proven loop into the place I actually manage relationships and money. After this, I work leads, record what people bought, and keep my newsletter list entirely from /admin behind my login, and every new lead gets an automatic confirmation email. This is what makes my Q2 ninety-day win achievable: every inquiry answered within 24 hours, 100% of inquiries tracked in /admin with a current stage, and 3 in 10 inquiries converting to a paying customer.</p>
+
+  <h3>The problem</h3>
+  <p>Seeing a lead is not the same as closing it. Without stages, a history, and a record of what was bought, I can't tell which shoppers I owe a reply, which are about to buy, or whether my 3-in-10 target is real.</p>
+
+  <h3>The data</h3>
+  <p>Everything in Build 1, plus activity_log (every stage change, with who made it) and Orders (product, amount, status, linked to the person). Newsletter is a filtered view of People where ok_to_contact = true.</p>
+
+  <h3>The workflow</h3>
+  <p>Lead lands → Resend sends the shopper a confirmation → I reply and move it to contacted → a fit or sizing call moves it to discovery_call → I send a recommendation (proposal) → they buy (won, and I add an Orders row) or don't (lost). Every move is logged. Each morning I open /admin and clear everything still sitting in new_lead.</p>
+
+  <h3>The ROI</h3>
+  <p>10 inquiries a week at a 3-in-10 conversion rate is about 3 customers a week, or roughly 156 a year. Orders gives me the average order value, so from day one I can see the real dollar value of the pipeline and of every lead that goes to lost.</p>
+
+  <h3>Scope</h3>
+  <p>The rest of the /admin back end behind my login: the full People directory, all inquiries with working pipeline stages, the Orders list, and the Newsletter list (ok_to_contact = true). Plus Resend wired so a confirmation email fires on form submit. Every Contacts status change writes an activity_log row.</p>
+
+  <h3>Definition of Done (every box must be true)</h3>
+  <ul class="check">
+    <li><input type="checkbox"><span>All four parts (People, Contacts, Orders, Newsletter) are visible and usable in /admin, and all of /admin sits behind my login.</span></li>
+    <li><input type="checkbox"><span>I can move a Contacts row through new_lead to contacted to discovery_call to proposal to won or lost from the interface.</span></li>
+    <li><input type="checkbox"><span>Each status change writes one activity_log row with from_status, to_status, and actor.</span></li>
+    <li><input type="checkbox"><span>The People directory is searchable and shows my custom attributes.</span></li>
+    <li><input type="checkbox"><span>I can add an Orders row against a person and see it on their record.</span></li>
+    <li><input type="checkbox"><span>The Newsletter list shows everyone with ok_to_contact = true.</span></li>
+    <li><input type="checkbox"><span>Resend is connected, the sending domain is verified, and a real confirmation email arrives after a form submit.</span></li>
+  </ul>
+
+  <h3>Success Criteria (how we know it's good, not just done)</h3>
+  <ul class="check">
+    <li><input type="checkbox"><span>I can run a lead from first inquiry to won without leaving /admin or touching the database.</span></li>
+    <li><input type="checkbox"><span>A person's full history (their inquiries, status changes, and orders) is visible in one place.</span></li>
+    <li><input type="checkbox"><span>A test submission produces a confirmation email in the inbox, not spam, with my domain as the sender.</span></li>
+    <li><input type="checkbox"><span>Nothing in /admin is reachable without logging in.</span></li>
+    <li><input type="checkbox"><span>At my real inquiry volume from Q2 (about 10 a week), this keeps up without me dropping to the database by hand.</span></li>
+  </ul>
+
+  <p class="note"><strong>Blocker to clear before Build 2:</strong> Resend cannot verify a vercel.app address. Connect a custom domain I own to the Vercel project and verify it in Resend before the confirmation email step.</p>
+</section>
+
+<footer>sample-project · product plan · matches Working Files/product-plan.md</footer>
+</main>
+</body>
+</html>
